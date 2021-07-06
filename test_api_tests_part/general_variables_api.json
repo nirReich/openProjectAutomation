@@ -1,0 +1,23 @@
+{
+  "api": {
+    "proj_by_id": {
+      "project_id": "34",
+      "project_name": "testproject1",
+      "project_desc": "This is the first test project",
+      "auth_params": [
+        "apikey",
+        "69f96bb3eb4669839c445c438346c92fe9433d01298f22d60da735321bbb4a93"
+      ],
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "url_for_testing": "http://localhost:8080/api/v3/projects"
+    },
+    "work_pac": {
+      "package_type": "Task",
+      "package_description": "My Task 1",
+      "work_pack_id": "38",
+      "base_url": "http://localhost:8080/api/v3"
+    }
+  }
+}

@@ -1,30 +1,17 @@
-import json
-import random
-import string
+from test_api_tests_part.api_utils import create_random_project_name, create_project_by_name, load_json_file
 
-import requests
+json = load_json_file()
+test_url = json["api"]["proj_by_id"]["url_for_testing"]
 
 
 def test_003_create_project():
-    rand_str_numbers = str(random.randint(0, 9)) + str(random.randint(0, 9))
-    rand_str_letters = random.choice(string.ascii_lowercase) + random.choice(string.ascii_lowercase)
-    project_rand_name = str("project " + rand_str_numbers + ' ' + rand_str_letters)
+    project_rand_name = create_random_project_name()
     project_rand_expected_name = project_rand_name.replace(" ", "-")
 
-    payload = json.dumps({
-        "description": {
-            "raw": "this is a new test project.."
-        },
-        "name": project_rand_name
-    })
-    headers = {
-        'Content-Type': 'application/json',
-        'Authorization': 'Basic YXBpa2V5OjY5Zjk2YmIzZWI0NjY5ODM5YzQ0NWM0MzgzNDZjOTJmZTk0MzNkMDEyOThmMjJkNjBkYTczNTMyMWJiYjRhOTM='
-    }
-    response = requests.post("http://localhost:8080/api/v3/projects", headers=headers, data=payload)
-
-    print(response.text)
+    payload = {"description": {"raw": "this is a new test project.."}, "name": project_rand_name}
+    headers = ('apikey', '69f96bb3eb4669839c445c438346c92fe9433d01298f22d60da735321bbb4a93')
+    response = create_project_by_name(test_url, headers, payload)
     print(f"response status: {response.status_code}")
 
     assert response.json()["identifier"] == project_rand_expected_name, \
-        f"faild creat project test!" f" expected name result{project_rand_expected_name}"
+        f"failed create project test!" f" expected name result{project_rand_expected_name}"
