@@ -1,20 +1,21 @@
-from test_api_tests_part.api_utils import create_work_pack, search_work_pack_in_project_by_subject, \
-    delete_work_pack_by_id, get_work_package_by_id
+import pytest
 
-project_id = "34"
-auth_params = ('apikey', '69f96bb3eb4669839c445c438346c92fe9433d01298f22d60da735321bbb4a93')
-test_url = f"http://localhost:8080/api/v3/projects"
-delete_url = "http://localhost:8080/api/v3/work_packages"
+from test_api_tests_part.api_utils import create_work_pack, search_work_pack_in_project_by_subject, \
+    delete_work_pack_by_id, get_work_package_by_id,load_json_file
+
+json = load_json_file()
+project_id = json["api"]["proj_by_id"]["project_id"]
+auth_params = (json["api"]["proj_by_id"]["auth_params"][0], json["api"]["proj_by_id"]["auth_params"][1])
+test_url = json["api"]["proj_by_id"]["url_for_testing"]
+delete_url = json["api"]["proj_by_id"]["delete_url"]
 body_for_test = {
     "subject": "newly created work pack for deletion"
 }
-headers = {
-    'Content-Type': 'application/json',
-    'Authorization': 'Basic YXBpa2V5OjY5Zjk2YmIzZWI0NjY5ODM5YzQ0NWM0MzgzNDZjOTJmZTk0MzNkMDEyOThmMjJkNjBkYTczNTMyMWJiYjRhOTM='
-}
+headers = json["api"]["work_pac"]["headers_for_delete"]
 full_creation_url = f"{test_url}/{project_id}//work_packages"
 
 
+@pytest.mark.work_pack_api_sanity
 def test_delete_work_package():
     create_response = create_work_pack(full_creation_url, auth_params, body_for_test)
     print("work pack create response: ", create_response)

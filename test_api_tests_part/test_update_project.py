@@ -1,12 +1,15 @@
-from test_api_tests_part.api_utils import update_project
-from test_api_tests_part.rest_client import HttpClient
+import pytest
 
-project_id = "34"
-test_url = "http://localhost:8080/api/v3"
-auth_params = ('apikey', '69f96bb3eb4669839c445c438346c92fe9433d01298f22d60da735321bbb4a93')
+from test_api_tests_part.api_utils import update_project, load_json_file
+
+json = load_json_file()
+project_id = json["api"]["proj_by_id"]["project_id"]
+test_url = json["api"]["proj_by_id"]["base_url"]
+auth_params = (json["api"]["proj_by_id"]["auth_params"][0], json["api"]["proj_by_id"]["auth_params"][1])
 payload = {"description": {"raw": "this is the new description!!"}}
 
 
+@pytest.mark.project_api_sanity
 def test_002_update_project():
     response = update_project(test_url, project_id, auth_params, payload)
     print("new description change: ", response.json()["description"]["raw"])

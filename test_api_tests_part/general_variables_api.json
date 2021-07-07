@@ -11,13 +11,19 @@
       "headers": {
         "Content-Type": "application/json"
       },
-      "url_for_testing": "http://localhost:8080/api/v3/projects"
+      "url_for_testing": "http://localhost:8080/api/v3/projects",
+      "base_url": "http://localhost:8080/api/v3",
+      "delete_url": "http://localhost:8080/api/v3/work_packages"
     },
     "work_pac": {
       "package_type": "Task",
       "package_description": "My Task 1",
       "work_pack_id": "38",
-      "base_url": "http://localhost:8080/api/v3"
+      "base_url": "http://localhost:8080/api/v3",
+      "headers_for_delete": {
+        "Content-Type": "application/json",
+        "Authorization": "Basic YXBpa2V5OjY5Zjk2YmIzZWI0NjY5ODM5YzQ0NWM0MzgzNDZjOTJmZTk0MzNkMDEyOThmMjJkNjBkYTczNTMyMWJiYjRhOTM="
+      }
     }
   }
 }

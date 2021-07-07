@@ -3,6 +3,9 @@
     "test_user_name": "admin",
     "test_password": "nir7281161",
     "project_description": "this is test project description",
-    "project_status": "On track"
+    "project_status": "On track",
+    "tested_project_name": "TestProject1",
+    "task_subject": "this is test task subject",
+    "task_description": "this is a test task description"
   }
 }

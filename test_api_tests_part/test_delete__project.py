@@ -1,14 +1,13 @@
 import random
-import time
 
-from selenium.webdriver.support.wait import WebDriverWait
+import pytest
 
-from test_api_tests_part.api_utils import create_project_by_name, delete_project_by_id, get_project_by_id, \
-    check_project_until_delete
+from test_api_tests_part.api_utils import create_project_by_name, delete_project_by_id, check_project_until_delete
 
 test_url = "http://localhost:8080//api/v3/projects"
 
 
+@pytest.mark.project_api_sanity
 def test_004_delete_project():
     rand_str_numbers = str(random.randint(0, 9)) + str(random.randint(0, 9))
     payload = {
