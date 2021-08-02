@@ -1,7 +1,7 @@
 {
   "ui": {
     "test_user_name": "admin",
-    "test_password": "nir7281161",
+    "test_password": "admin",
     "project_description": "this is test project description",
     "project_status": "On track",
     "tested_project_name": "TestProject1",
